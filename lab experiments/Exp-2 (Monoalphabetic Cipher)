@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <ctype.h>
+int main()
+{
+    char text[100], key[27];
+    int i, p;
+    printf("Enter plaintext: ");
+    fgets(text, sizeof(text), stdin);
+    printf("Enter 26-letter key: ");
+    scanf("%26s", key);
+    for(i = 0; text[i] != '\0'; i++)
+    {
+        if(isalpha(text[i]))
+        {
+            p = toupper(text[i]) - 'A';
+
+            if(isupper(text[i]))
+                text[i] = toupper(key[p]);
+            else
+                text[i] = tolower(key[p]);
+        }
+    }
+    printf("Ciphertext: %s", text);
+    return 0;
+}
