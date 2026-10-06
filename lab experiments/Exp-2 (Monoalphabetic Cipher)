@@ -30,8 +30,6 @@ int main() {
                 text[i] = 'a' + j;
         }
     }
-
     printf("Decrypted text: %s\n", text);
-
     return 0;
 }
