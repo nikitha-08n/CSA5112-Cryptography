@@ -6,23 +6,30 @@ int gcd(int a, int b) {
 }
 int main() {
     char c[500];
-    int a, b, i, x, inv;
+    int i, a, b, inv = -1, x;
     printf("Enter ciphertext: ");
     scanf(" %499[^\n]", c);
     for (a = 1; a < 26; a++) {
-        if (gcd(a, 26) != 1) continue;
-        inv = 1;
-        while ((a * inv) % 26 != 1) inv++;
-        for (b = 0; b < 26; b++) {
-            printf("\na=%d b=%d: ", a, b);
-
-            for (i = 0; c[i]; i++) {
-                if (isalpha((unsigned char)c[i])) {
-                    x = toupper((unsigned char)c[i]) - 'A';
-                    putchar((inv * (x - b + 26)) % 26 + 'A');
-                } else putchar(c[i]);
-            }
+        if (gcd(a, 26) == 1 &&
+            (a * (19 - 4) - (20 - 1)) % 26 == 0)
+            break;
+    }
+    b = (1 - a * 4 + 26 * 26) % 26;
+    for (i = 1; i < 26; i++)
+        if ((a * i) % 26 == 1) {
+            inv = i;
+            break;
+        }
+    printf("Key a = %d, b = %d\n", a, b);
+    printf("Decrypted text: ");
+    for (i = 0; c[i]; i++) {
+        if (isalpha((unsigned char)c[i])) {
+            x = toupper((unsigned char)c[i]) - 'A';
+            putchar((inv * (x - b + 26)) % 26 + 'A');
+        } else {
+            putchar(c[i]);
         }
     }
+    printf("\n");
     return 0;
 }
